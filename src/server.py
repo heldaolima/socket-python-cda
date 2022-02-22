@@ -75,10 +75,10 @@ Para desconectar, envie '!DISCONNECT'"""
         - Voce vence se a reposta estiver correta
     
     Verso: {verso}
-    * Se voce acha que é 'A Ingaia Ciencia', insira 1
-    * Se voce acha que é 'Legado', insira 2
-    * Se voce acha que é 'Soneto da Loucura', insira 3
-    * Se voce acha que é 'Oficina Irritada', insira 4
+    * Se voce acha que e 'A Ingaia Ciencia', insira 1
+    * Se voce acha que e 'Legado', insira 2
+    * Se voce acha que e 'Soneto da Loucura', insira 3
+    * Se voce acha que e 'Oficina Irritada', insira 4
     * Se voce quiser desconectar, envie '!DISCONNECT'"""
 
                     conn.send(desafio.encode(FORMAT))
@@ -101,7 +101,7 @@ Para desconectar, envie '!DISCONNECT'"""
             else:
                 if flag_jogo:
                     if msg.isnumeric() and int(msg) == num:
-                        result = "Correto! Vejo que voce é um especialista na poesia de Drummond!\n\n"
+                        result = "Correto! Vejo que voce e um especialista na poesia de Drummond!\n\n"
                         
                     else:
                         result = "Incorreto! Mas voce pode tentar novamente!\n\n"
