@@ -3,7 +3,7 @@ import threading
 from random import randint
 
 HEADER = 2048 #tamanho de bits
-PORT = 1234 #porta que não está sendo usada
+PORT = 1234 #porta que não esta sendo usada
 SERVER = socket.gethostbyname(socket.gethostname()) # roda em qualquer pc
 ADDR = (SERVER, PORT) #endereço
 FORMAT = 'utf-8'
@@ -70,16 +70,16 @@ Para desconectar, envie '!DISCONNECT'"""
 
                     desafio = f"""Iniciando o jogo...
     -- Regras do jogo:
-        - Você receberá um verso de um dos poemas 
+        - Voce recebera um verso de um dos poemas 
         - Basta dizer a qual poema pertence o verso 
-        - Você vence se a reposta estiver correta
+        - Voce vence se a reposta estiver correta
     
     Verso: {verso}
-    * Se você acha que é 'A Ingaia Ciência', insira 1
-    * Se você acha que é 'Legado', insira 2
-    * Se você acha que é 'Soneto da Loucura', insira 3
-    * Se você acha que é 'Oficina Irritada', insira 4
-    * Se você quiser desconectar, envie '!DISCONNECT'"""
+    * Se voce acha que é 'A Ingaia Ciencia', insira 1
+    * Se voce acha que é 'Legado', insira 2
+    * Se voce acha que é 'Soneto da Loucura', insira 3
+    * Se voce acha que é 'Oficina Irritada', insira 4
+    * Se voce quiser desconectar, envie '!DISCONNECT'"""
 
                     conn.send(desafio.encode(FORMAT))
 
@@ -87,30 +87,31 @@ Para desconectar, envie '!DISCONNECT'"""
                     primeira = False
                     flag_poemas = True
                     menu = """Carregando poemas...\n4 Poemas de Carlos Drummond de Andrade
-    [1] A Ingaia Ciência
+    [1] A Ingaia Ciencia
     [2] Legado
     [3] Soneto da Loucura
     [4] Oficina Irritada
+    [5] Retornar ao menu inicial
     
     Para desconectar, envie '!DISCONNECT' """
                     conn.send(menu.encode(FORMAT))
                 else:
-                    conn.send("Mensagem inválida recebida! Tente de novo.".encode(FORMAT))
+                    conn.send("Mensagem invalida recebida! Tente de novo.".encode(FORMAT))
 
             else:
                 if flag_jogo:
                     if msg.isnumeric() and int(msg) == num:
-                        result = "Correto! Vejo que você é um especialista na poesia de Drummond!\n\n"
+                        result = "Correto! Vejo que voce é um especialista na poesia de Drummond!\n\n"
                         
                     else:
-                        result = "Incorreto! Mas você pode tentar novamente!\n\n"
+                        result = "Incorreto! Mas voce pode tentar novamente!\n\n"
                     flag_jogo = False
                     primeira = True
 
                     conn.send((result+boas_vindas).encode(FORMAT))
 
                 elif flag_poemas:
-                    if msg in ["1", "2", "3", "4"]:        
+                    if msg in ["1", "2", "3", "4", "5"]:        
                         if msg == "1":
                             arquivo = open('conteudo/ingaia.txt', 'r')
                             conn.send(arquivo.read().encode(FORMAT))
@@ -127,14 +128,18 @@ Para desconectar, envie '!DISCONNECT'"""
                             arquivo = open('conteudo/oficina.txt', 'r')
                             conn.send(arquivo.read().encode(FORMAT))
                             arquivo.close()
+                        elif msg == "5":
+                            flag_poemas = False
+                            primeira = True
+                            conn.send(("Retornando...\n\n"+boas_vindas).encode(FORMAT))
                     else:
-                        conn.send("Mensagem inválida recebida! Tente de novo.".encode(FORMAT))
+                        conn.send("Mensagem invalida recebida! Tente de novo.".encode(FORMAT))
     conn.close()
 
 
 def start(): # novas coneexões
     server.listen()
-    print(f"[Listening] O servidor está ouvindo em [{SERVER}]")
+    print(f"[LISTENING] O servidor esta ouvindo em [{SERVER}]")
     while True:
         conn, addr = server.accept()
         thread = threading.Thread(target=handle_client, args=(conn, addr))
@@ -142,5 +147,5 @@ def start(): # novas coneexões
         print(f"[ACTIVE CONNECTIONS] {threading.activeCount() - 1}"  )
 
 
-print("[INICIANDO] O servidor está iniciando")
+print("[INICIANDO] O servidor esta iniciando")
 start();
