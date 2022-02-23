@@ -14,12 +14,14 @@ Há duas funcionalidades básicas, que funcionam no modelo cliente-servidor, cap
  
  ## Como executar
  1. Não há dependências a serem instaladas além do próprio Python
- 2. Como o socket funciona com base no protocolo TCP, execute inicialmente o servidor:  
+ 2. Como o socket funciona com base no protocolo TCP, execute inicialmente o servidor (sempre dentro da pasta 'src', para não ter problemas com os arquivos):  
  ```
-    python3 src/server.py
+    cd src
+    python3 server.py
  ```
  3. Em seguida, execute o cliente em outro terminal. Como é multithread, podem ser diversos clientes em diversos terminais:  
 ```
-    python3 src/client.py
+    cd src
+    python3 client.py
 ```
 4. No cliente, basta seguir os menus!
